@@ -56,6 +56,7 @@ function updategMeme(memeImg) {
 
 function setTxtSize(isIncrease) {
     let meme = getgMeme();
+    if (!meme.lines.length) return;
     let lineIdx = meme.selectedLineIdx;
     meme.lines[lineIdx].size = (isIncrease) ? meme.lines[lineIdx].size + 5 : meme.lines[lineIdx].size - 5;
 }
@@ -63,6 +64,7 @@ function setTxtSize(isIncrease) {
 function setTxtAlign(value) {
     let meme = getgMeme();
     let lineIdx = meme.selectedLineIdx;
+    if (!meme.lines.length || meme.lines[lineIdx].isSticker) return;
     let memeAlign;
     if (value === 0) {
         memeAlign = 'center';
@@ -94,7 +96,6 @@ function setSticker(id) {
         isSticker: true,
         stickerId: id,
         size: 30,
-        align: 'center',
         newPosition: 0
     })
     meme.selectedLineIdx = meme.lines.length - 1;

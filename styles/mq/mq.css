@@ -49,6 +49,13 @@
     .editor-container .settings-container {
         width: 100%;
     }
+    .search-container .categorie-input {
+        height: 30px;
+        width: 150px;
+    }
+    .search-container p {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width: 640px) {

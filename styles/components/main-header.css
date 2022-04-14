@@ -38,12 +38,12 @@
 }
 
 .main-nav a.active {
-    color: #03a9f4;
+    color: #f40303;
     box-shadow: inset 0px -10px 0;
 }
 
 .main-nav a:hover {
-    color: #03a9f4;
+    color: #f40303;
 }
 
 .saved-memes-amout {

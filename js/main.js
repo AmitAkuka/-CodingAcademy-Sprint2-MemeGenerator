@@ -1,6 +1,7 @@
 'use strict';
 console.log('MainJS Working!');
-
+// let gStartPos;
+// const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onInit() {
     console.log('Init');
