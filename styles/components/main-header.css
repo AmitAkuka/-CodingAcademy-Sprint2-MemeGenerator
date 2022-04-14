@@ -1,0 +1,53 @@
+.main-header {
+    height: 125px;
+}
+
+.logo span {
+    color: white;
+    font-size: 2.5rem;
+    font-family: gabriel-weiss;
+    position: absolute;
+    top: 48px;
+    left: 160px;
+}
+
+.main-nav>* {
+    cursor: pointer;
+}
+
+.main-header .header-gif {
+    height: 110px;
+}
+
+.main-header .logo a {
+    text-decoration: none;
+    color: black;
+}
+
+.main-header .main-nav a {
+    text-transform: uppercase;
+    text-decoration: none;
+    /* font-family: system-ui; */
+    font-family: gabriel-weiss;
+    color: white;
+    display: block;
+    line-height: 125px;
+    height: 125px;
+    width: 8.4375rem;
+    text-align: center;
+}
+
+.main-nav a.active {
+    color: #03a9f4;
+    box-shadow: inset 0px -10px 0;
+}
+
+.main-nav a:hover {
+    color: #03a9f4;
+}
+
+.saved-memes-amout {
+    color: red;
+    font-size: 18px;
+    margin-inline-start: 15px;
+}

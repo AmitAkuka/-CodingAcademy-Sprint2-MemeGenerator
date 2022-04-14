@@ -1,0 +1,189 @@
+.editor-container {
+    margin-top: 45px;
+    height: 68vh;
+    width: 80vw;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: -4px 7px 8px;
+}
+
+.middle-settings-container #color-input,
+.middle-settings-container #stroke-color-input {
+    visibility: hidden;
+    width: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+.upper-settings-container>*:not(:nth-child(1)) {
+    margin-inline-start: 15px;
+}
+
+.settings-container {
+    flex-direction: column;
+}
+
+.settings-container>* {
+    margin-top: 12px;
+}
+
+.editor-container .canvas-container {
+    height: 90%;
+    width: 60%;
+    margin-inline-start: 25px;
+}
+
+.editor-container .settings-container {
+    height: 90%;
+    width: 40%;
+    margin-inline-start: 25px;
+}
+
+.settings-container .text-input {
+    margin-top: 10px;
+    height: 45px;
+    width: 355px;
+    font-family: cursive;
+    font-size: 1.6rem;
+    line-height: 1.75;
+    box-shadow: rgb(45 35 66 / 40%) 0 2px 4px, rgb(45 35 66 / 30%) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+}
+
+.middle-settings-container {
+    width: 312px;
+}
+
+.middle-settings-container>*:not(:nth-child(1)):not(:nth-child(6)) {
+    margin-inline-start: 15px;
+}
+
+.middle-settings-container>* {
+    margin-top: 12px;
+}
+
+
+/* .settings-container button {
+    align-items: center;
+    appearance: none;
+    background-color: darkgrey;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono", monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+.settings-container button:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.settings-container button:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.settings-container button:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+} */
+
+.color-input-btn label,
+.stroke-color-input-btn label {
+    width: 100%;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 44px;
+    padding-right: 13px;
+    padding-left: 13px;
+}
+
+.middle-settings-container .color-input-btn,
+.middle-settings-container .stroke-color-input-btn {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.selectdiv:after {
+    font: 17px "Consolas", monospace;
+    color: #333;
+}
+
+.selectdiv select {
+    height: 48px;
+    padding: 0px 24px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #333;
+    font-family: system-ui;
+    cursor: pointer;
+    box-shadow: rgb(45 35 66 / 40%) 0 2px 4px, rgb(45 35 66 / 30%) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+    border: none;
+    border-radius: 5px;
+    FONT-WEIGHT: 700;
+    background-color: darkgray;
+}
+
+.stickers-settings-container {
+    background-color: white;
+    width: 355px;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stickers-settings-container>p {
+    padding-inline-start: 5px;
+    padding-inline-end: 5px;
+    cursor: pointer;
+}
+
+.stickers-list>img {
+    height: 45px;
+    width: 60px;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.button-settings-container {
+    display: flex;
+    width: 305px;
+    justify-content: space-between;
+}
+
+.button-settings-container a {
+    text-decoration: none;
+}
+
+.button-settings-container button {
+    width: 90px;
+}
+
+
+/* 
+.middle-settings-container>a {
+    text-decoration: none;
+} */
