@@ -85,7 +85,7 @@
                     <p><i class="fa fa-arrow-right fa-lg"></i></p>
                 </div>
                 <div class="button-settings-container">
-                    <button><i class="fa fa-share-alt fa-2x"></i></button>
+                    <button onclick="onShareMeme()"><i class="fa fa-share-alt fa-2x"></i></button>
                     <button onclick="onSaveMeme()"><i class="fa fa-floppy-o fa-2x"></i></button>
                     <a href="#" onclick="onDownloadCanvas(this)" download=""><button><i class="fa fa-download fa-2x"></i></button></a>
                 </div>
@@ -113,8 +113,7 @@
 
             </div>
             <div class="images-container main-layout grid">
-                <!-- <img id="1" src="images/1.jpg" onclick="onSelectImg(this.id)">
-                    <img id="2" src="images/2.jpg" onclick="onSelectImg(this.id)"> -->
+                <!-- Here we render images -->
             </div>
         </section>
         <section class="saved-memes-container flex justify-center" style="display: none;">
@@ -129,6 +128,7 @@
     <footer>
         <p>Made with <i class="fa fa-code fa-lg"></i> by Amit Akuka</p>
     </footer>
+    <script src="js/service/upload-service.js"></script>
     <script src="js/service/storageService.js"></script>
     <script src="js/service/meme.service.js"></script>
     <script src="js/controller/meme.controller.js"></script>

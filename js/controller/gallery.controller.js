@@ -21,6 +21,8 @@ function onSelectImg(imgId) {
     document.querySelector('.editor-container').style.display = 'flex';
     addListeners();
     renderMeme();
+    //after rendering - checking for the current display size and fit canvas.
+    resizeCanvas();
 }
 
 function onFilterInput(filterBy) {

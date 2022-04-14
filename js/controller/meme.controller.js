@@ -6,48 +6,45 @@ let gElCanvas = document.querySelector('#canvas');
 let gCtx = gElCanvas.getContext('2d');
 
 function renderMeme() {
-    const { selectedImgId, lines, stickers } = getgMeme();
+    const { selectedImgId, lines } = getgMeme();
     //return when resize calling func
     let img = new Image();
     img.src = `images/${selectedImgId}.jpg`
     img.onload = () => {
         //Draw Image
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-        if (stickers.length) renderStickers(stickers);
-        //Draw Text;
-        //Styles:
         lines.forEach((line, idx) => {
-            gCtx.font = `${line.size}px ${line.fontFamily}`;
-            gCtx.textAlign = line.align;
-            gCtx.fillStyle = line.color;
-            gCtx.strokeStyle = line.strokeColor;
-            let x = gElCanvas.width / 2;
-            let y;
-            if (idx === 0) {
-                //first line at the top
-                y = 50 + line.newPosition;
-            } else if (idx === 1) {
-                //second line at the bottom.
-                y = gElCanvas.height - 25 + line.newPosition;
+            if (!line.isSticker) {
+                gCtx.font = `${line.size}px ${line.fontFamily}`;
+                gCtx.textAlign = line.align;
+                gCtx.fillStyle = line.color;
+                gCtx.strokeStyle = line.strokeColor;
+                let x = gElCanvas.width / 2;
+                let y;
+                if (idx === 0) {
+                    //first line at the top
+                    y = 50 + line.newPosition;
+                } else if (idx === 1) {
+                    //second line at the bottom.
+                    y = gElCanvas.height - 25 + line.newPosition;
+                } else {
+                    //third line at the middle.
+                    y = gElCanvas.height / 2 + line.newPosition;
+                }
+                //text width = fullwidth - 20.
+                gCtx.fillText(line.txt, x, y, gElCanvas.width - 20);
+                //stroke
+                gCtx.strokeText(line.txt, x, y, gElCanvas.width - 20);
             } else {
-                //third line at the middle.
-                y = gElCanvas.height / 2 + line.newPosition;
+                let stickerImg = new Image();
+                stickerImg.src = `images/stickers/${line.stickerId}.png`;
+                let y = 50 + line.newPosition;
+                //Draw Sticker
+                gCtx.drawImage(stickerImg, gElCanvas.width - 250, y, line.size, line.size);
+
             }
-            //text width = fullwidth - 20.
-            gCtx.fillText(line.txt, x, y, gElCanvas.width - 20);
-            //stroke
-            gCtx.strokeText(line.txt, x, y, gElCanvas.width - 20);
         })
     };
-}
-
-function renderStickers(stickers) {
-    stickers.forEach((sticker) => {
-        let stickerImg = new Image();
-        stickerImg.src = `../../images/stickers/${sticker.id}.png`
-            //Draw Sticker
-        gCtx.drawImage(stickerImg, gElCanvas.width - 250, 50, 150, 100 / 2);
-    })
 }
 
 function onSavedNavClick(elSavedNav) {
@@ -74,15 +71,13 @@ function onSaveMeme() {
 
 function onDeleteSavedMemes() {
     if (confirm('Are you sure you want to delete saved memes?')) {
-        let savedMemes = getSavedMemes();
-        savedMemes.length = 0;
+        deleteSavedMemes();
         document.querySelector('.saved-memes-gallery').innerHTML = '';
         document.querySelector('.saved-memes-amout').innerText = 0;
     }
 }
 
 function onAddSticker(stickerId) {
-    console.log(stickerId);
     setSticker(stickerId);
     renderMeme();
 }
@@ -143,4 +138,9 @@ function onDownloadCanvas(elLink) {
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'Sprint2-AmitAkuka.jpg';
+}
+
+function onShareMeme() {
+    console.log('share')
+    uploadImg();
 }

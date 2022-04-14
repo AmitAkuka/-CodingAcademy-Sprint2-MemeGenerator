@@ -42,6 +42,7 @@ function updategMeme(memeImg) {
         selectedImgId: memeImg.id,
         selectedLineIdx: 0,
         lines: [{
+            isSticker: false,
             txt: 'Enter your text here...',
             size: 30,
             align: 'center',
@@ -50,7 +51,6 @@ function updategMeme(memeImg) {
             fontFamily: 'impact',
             newPosition: 0
         }],
-        stickers: []
     }
 }
 
@@ -74,12 +74,6 @@ function setTxtAlign(value) {
     meme.lines[lineIdx].align = memeAlign;
 }
 
-function setSticker(stickerId) {
-    let meme = getgMeme();
-    let stickerIdx = meme.stickers;
-    if (stickerIdx === 3) return;
-    meme.stickers.push({ id: stickerId });
-}
 
 function setTxtColor(color) {
     let meme = getgMeme();
@@ -93,11 +87,25 @@ function setStrokeColor(color) {
     meme.lines[lineIdx].strokeColor = color;
 }
 
+function setSticker(id) {
+    let meme = getgMeme();
+    if (meme.lines.length === 3) return;
+    meme.lines.push({
+        isSticker: true,
+        stickerId: id,
+        size: 30,
+        align: 'center',
+        newPosition: 0
+    })
+    meme.selectedLineIdx = meme.lines.length - 1;
+}
+
 function setNewLine() {
     let meme = getgMeme();
     //limited to 3 text inputs
     if (meme.lines.length === 3) return;
     meme.lines.push({
+        isSticker: false,
         txt: 'Enter your text here...',
         size: 30,
         align: 'center',
@@ -137,15 +145,28 @@ function deleteLine() {
     meme.lines.splice(lineIdx, 1);
 }
 
+function deleteSavedMemes() {
+    let savedMemes = getSavedMemes();
+    savedMemes.length = 0;
+    saveToStorage(SAVED_MEME_KEY, savedMemes);
+}
+
 function saveMeme() {
     const data = gElCanvas.toDataURL();
     gSavedMemes.push(data);
-    saveToStorage(SAVED_MEME_KEY, data);
+    saveToStorage(SAVED_MEME_KEY, gSavedMemes);
 }
 
 
 function getSavedMemes() {
+    gSavedMemes = loadFromStorage(SAVED_MEME_KEY);
     return gSavedMemes;
+}
+
+function loadSavedMemesAmout() {
+    getSavedMemes();
+    let savedMemes = gSavedMemes;
+    document.querySelector('.saved-memes-amout').innerText = savedMemes.length;
 }
 
 function getgMeme() {

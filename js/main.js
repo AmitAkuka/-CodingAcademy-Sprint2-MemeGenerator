@@ -5,6 +5,7 @@ console.log('MainJS Working!');
 function onInit() {
     console.log('Init');
     renderGallery();
+    loadSavedMemesAmout();
     // renderMeme(); now render only when user selected img.
 }
 
@@ -16,7 +17,7 @@ function addListeners() {
         onChangeStrokeColor(this.value);
     });
     window.addEventListener('resize', () => {
-        resizeCanvas()
+        resizeCanvas();
         renderMeme();
     })
 }
