@@ -1,0 +1,46 @@
+.search-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.search-container>* {
+    cursor: pointer;
+}
+
+.search-container p {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.search-container .categorie-input {
+    height: 30px;
+    width: 200px;
+}
+
+.search-container p:hover {
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+}
+
+@keyframes scale-up-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+}

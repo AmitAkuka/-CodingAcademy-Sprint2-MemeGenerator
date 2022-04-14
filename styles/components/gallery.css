@@ -1,18 +1,18 @@
-.gallery-container {
+.images-container {
     margin-top: 25px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
     margin-bottom: 95px;
 }
 
-.gallery-container>img {
+.images-container>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     cursor: pointer;
 }
 
-.gallery-container>img:hover {
+.images-container>img:hover {
     -webkit-animation-name: pulse;
     animation-name: pulse;
     -webkit-animation-duration: 1s;

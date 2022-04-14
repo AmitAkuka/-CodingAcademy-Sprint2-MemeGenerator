@@ -3,22 +3,22 @@
 console.log('Meme service Working!');
 
 const SAVED_MEME_KEY = 'SavedMemes';
-let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'cat'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['funny', 'cat'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['funny', 'cat'] },
-    { id: 4, url: 'img/4.jpg', keywords: ['funny', 'cat'] },
-    { id: 5, url: 'img/5.jpg', keywords: ['funny', 'cat'] },
-    { id: 6, url: 'img/6.jpg', keywords: ['funny', 'cat'] },
-    { id: 7, url: 'img/7.jpg', keywords: ['funny', 'cat'] },
-    { id: 8, url: 'img/8.jpg', keywords: ['funny', 'cat'] },
-    { id: 9, url: 'img/9.jpg', keywords: ['funny', 'cat'] },
-    { id: 10, url: 'img/10.jpg', keywords: ['funny', 'cat'] },
-    { id: 11, url: 'img/11.jpg', keywords: ['funny', 'cat'] },
-    { id: 12, url: 'img/12.jpg', keywords: ['funny', 'cat'] },
-    { id: 13, url: 'img/13.jpg', keywords: ['funny', 'cat'] },
-    { id: 14, url: 'img/14.jpg', keywords: ['funny', 'cat'] },
-    { id: 15, url: 'img/15.jpg', keywords: ['funny', 'cat'] },
-    { id: 16, url: 'img/16.jpg', keywords: ['funny', 'cat'] }
+let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'akward'] },
+    { id: 2, url: 'img/2.jpg', keywords: ['animal', 'funny'] },
+    { id: 3, url: 'img/3.jpg', keywords: ['animal', 'funny'] },
+    { id: 4, url: 'img/4.jpg', keywords: ['animal', 'cat'] },
+    { id: 5, url: 'img/5.jpg', keywords: ['funny', 'akward'] },
+    { id: 6, url: 'img/6.jpg', keywords: ['funny', 'akward'] },
+    { id: 7, url: 'img/7.jpg', keywords: ['funny', 'bad'] },
+    { id: 8, url: 'img/8.jpg', keywords: ['funny', 'akward'] },
+    { id: 9, url: 'img/9.jpg', keywords: ['funny', 'happy'] },
+    { id: 10, url: 'img/10.jpg', keywords: ['funny', 'bad'] },
+    { id: 11, url: 'img/11.jpg', keywords: ['akward', 'sad'] },
+    { id: 12, url: 'img/12.jpg', keywords: ['bad', 'sad'] },
+    { id: 13, url: 'img/13.jpg', keywords: ['akward', 'happy'] },
+    { id: 14, url: 'img/14.jpg', keywords: ['funny', 'sad'] },
+    { id: 15, url: 'img/15.jpg', keywords: ['funny', 'akward'] },
+    { id: 16, url: 'img/16.jpg', keywords: ['funny', 'akward'] }
 ];
 let gSavedMemes = [];
 let gMeme = null;
@@ -35,6 +35,7 @@ function setImg(imgId) {
     })
     updategMeme(memeImg);
 }
+
 
 function updategMeme(memeImg) {
     gMeme = {

@@ -9,9 +9,6 @@ function onInit() {
 }
 
 function addListeners() {
-    document.querySelector('.text-input').addEventListener('input', function() {
-        onTxtInput(this.value);
-    });
     document.querySelector('#color-input').addEventListener('input', function() {
         onChangeColor(this.value);
     });
