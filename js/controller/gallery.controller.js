@@ -17,7 +17,7 @@ function renderGallery() {
 
 function onSelectImg(imgId) {
     setImg(imgId);
-    document.querySelector('.images-container').style.display = 'none';
+    document.querySelector('.gallery-container').style.display = 'none';
     document.querySelector('.editor-container').style.display = 'flex';
     addListeners();
     renderMeme();
