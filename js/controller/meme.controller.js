@@ -7,7 +7,6 @@ let gCtx = gElCanvas.getContext('2d');
 
 function renderMeme() {
     const { selectedImgId, lines } = getgMeme();
-    //return when resize calling func
     let img = new Image();
     img.src = `images/${selectedImgId}.jpg`
     img.onload = () => {
@@ -19,28 +18,34 @@ function renderMeme() {
                 gCtx.textAlign = line.align;
                 gCtx.fillStyle = line.color;
                 gCtx.strokeStyle = line.strokeColor;
-                let x = gElCanvas.width / 2;
-                let y;
-                if (idx === 0) {
-                    //first line at the top
-                    y = 50 + line.newPosition;
-                } else if (idx === 1) {
-                    //second line at the bottom.
-                    y = gElCanvas.height - 25 + line.newPosition;
-                } else {
-                    //third line at the middle.
-                    y = gElCanvas.height / 2 + line.newPosition;
+                //if no position add position.
+                if (!line.pos) {
+                    let x = gElCanvas.width / 2;
+                    let y;
+                    if (idx === 0) {
+                        //first line at the top
+                        y = 50;
+                    } else if (idx === 1) {
+                        //second line at the bottom.
+                        y = gElCanvas.height - 25;
+                    } else {
+                        //third line at the middle.
+                        y = gElCanvas.height / 2;
+                    }
+                    line.pos = { x: x, y: y };
                 }
                 //text width = fullwidth - 20.
-                gCtx.fillText(line.txt, x, y, gElCanvas.width - 20);
-                //stroke
-                gCtx.strokeText(line.txt, x, y, gElCanvas.width - 20);
+                gCtx.fillText(line.txt, line.pos.x, line.pos.y, gElCanvas.width - 20);
+                gCtx.strokeText(line.txt, line.pos.x, line.pos.y, gElCanvas.width - 20);
             } else {
                 let stickerImg = new Image();
                 stickerImg.src = `images/stickers/${line.stickerId}.png`;
-                let y = 50 + line.newPosition;
-                //Draw Sticker
-                gCtx.drawImage(stickerImg, gElCanvas.width - 250, y, line.size, line.size);
+                if (!line.pos) {
+                    let y = 50;
+                    let x = gElCanvas.width - 100;
+                    line.pos = { x: x, y: y };
+                }
+                gCtx.drawImage(stickerImg, line.pos.x, line.pos.y, line.size, line.size);
 
             }
         })

@@ -22,6 +22,7 @@ let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'akward'] },
 ];
 let gSavedMemes = [];
 let gMeme = null;
+let gGrabbedLine = null;
 
 function setLineTxt(txt) {
     let meme = getgMeme();
@@ -49,7 +50,8 @@ function updategMeme(memeImg) {
             color: 'black',
             strokeColor: 'black',
             fontFamily: 'impact',
-            newPosition: 0
+            pos: null,
+            isDragged: false
         }],
     }
 }
@@ -96,7 +98,8 @@ function setSticker(id) {
         isSticker: true,
         stickerId: id,
         size: 30,
-        newPosition: 0
+        pos: null,
+        isDragged: false
     })
     meme.selectedLineIdx = meme.lines.length - 1;
 }
@@ -113,7 +116,8 @@ function setNewLine() {
         color: 'black',
         strokeColor: 'black',
         fontFamily: 'impact',
-        newPosition: 0
+        pos: null,
+        isDragged: false
     })
     meme.selectedLineIdx = meme.lines.length - 1;
 }
@@ -136,7 +140,7 @@ function setNewPos(isDown) {
     let meme = getgMeme();
     if (!meme.lines.length) return;
     let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].newPosition = (isDown) ? meme.lines[lineIdx].newPosition += 5 : meme.lines[lineIdx].newPosition -= 5;
+    meme.lines[lineIdx].pos.y = (isDown) ? meme.lines[lineIdx].pos.y += 5 : meme.lines[lineIdx].pos.y -= 5;
 }
 
 function deleteLine() {
@@ -178,14 +182,34 @@ function getImgs() {
     return gImgs;
 }
 
+function getGrabbedLine() {
+    return gGrabbedLine;
+}
 
+function isLineClicked(clickedPos) {
+    let meme = getgMeme();
+    gGrabbedLine = meme.lines.find((line, idx) => {
+        //old way
+        // const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2);
+        // if (distance <= line.size) {
+        //     //update selectedlineidx
+        //     meme.selectedLineIdx = idx;
+        //     return true;
+        // }
+        if (clickedPos.x >= line.pos.x - line.size * 5 && clickedPos.x <= line.pos.x + line.size * 5 && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size) {
+            meme.selectedLineIdx = idx;
+            return true;
+        }
+    });
+    //checking if grabbed is not falsy;
+    return (gGrabbedLine);
+}
 
-// function getMemeById(memeId) {
-//     let memeImg = gImgs.find((img) => {
-//             if (img.id.toString() === memeId) return img;
-//         })
-//         //update gMeme on the new selected img
+function setLineDrag(isDrag) {
+    gGrabbedLine.isDragged = isDrag;
+}
 
-//     console.log(gMeme);
-//     return gMeme;
-// }
+function moveLine(dx, dy) {
+    gGrabbedLine.pos.x += dx;
+    gGrabbedLine.pos.y += dy;
+}
