@@ -57,16 +57,14 @@ function updategMeme(memeImg) {
 }
 
 function setTxtSize(isIncrease) {
-    let meme = getgMeme();
-    if (!meme.lines.length) return;
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].size = (isIncrease) ? meme.lines[lineIdx].size + 5 : meme.lines[lineIdx].size - 5;
+    if (!gMeme.lines.length) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].size = (isIncrease) ? gMeme.lines[lineIdx].size + 5 : gMeme.lines[lineIdx].size - 5;
 }
 
 function setTxtAlign(value) {
-    let meme = getgMeme();
-    let lineIdx = meme.selectedLineIdx;
-    if (!meme.lines.length || meme.lines[lineIdx].isSticker) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    if (!gMeme.lines.length || gMeme.lines[lineIdx].isSticker) return;
     let memeAlign;
     if (value === 0) {
         memeAlign = 'center';
@@ -75,40 +73,36 @@ function setTxtAlign(value) {
     } else {
         memeAlign = 'right';
     }
-    meme.lines[lineIdx].align = memeAlign;
+    gMeme.lines[lineIdx].align = memeAlign;
 }
 
 
 function setTxtColor(color) {
-    let meme = getgMeme();
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].color = color;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].color = color;
 }
 
 function setStrokeColor(color) {
-    let meme = getgMeme();
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].strokeColor = color;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].strokeColor = color;
 }
 
 function setSticker(id) {
-    let meme = getgMeme();
-    if (meme.lines.length === 3) return;
-    meme.lines.push({
+    if (gMeme.lines.length === 3) return;
+    gMeme.lines.push({
         isSticker: true,
         stickerId: id,
-        size: 30,
+        size: 50,
         pos: null,
         isDragged: false
     })
-    meme.selectedLineIdx = meme.lines.length - 1;
+    gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function setNewLine() {
-    let meme = getgMeme();
     //limited to 3 text inputs
-    if (meme.lines.length === 3) return;
-    meme.lines.push({
+    if (gMeme.lines.length === 3) return;
+    gMeme.lines.push({
         isSticker: false,
         txt: 'Enter your text here...',
         size: 30,
@@ -119,35 +113,31 @@ function setNewLine() {
         pos: null,
         isDragged: false
     })
-    meme.selectedLineIdx = meme.lines.length - 1;
+    gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function setSwitchLine() {
-    let meme = getgMeme();
-    if (!meme.lines.length) return;
-    (meme.selectedLineIdx >= meme.lines.length - 1) ? meme.selectedLineIdx = 0: meme.selectedLineIdx += 1;
-    return meme.selectedLineIdx;
+    if (!gMeme.lines.length) return;
+    (gMeme.selectedLineIdx >= gMeme.lines.length - 1) ? gMeme.selectedLineIdx = 0: gMeme.selectedLineIdx += 1;
+    return gMeme.selectedLineIdx;
 }
 
 function setNewFont(font) {
-    let meme = getgMeme();
-    if (!meme.lines.length) return;
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].fontFamily = font;
+    if (!gMeme.lines.length) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].fontFamily = font;
 }
 
 function setNewPos(isDown) {
-    let meme = getgMeme();
-    if (!meme.lines.length) return;
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].pos.y = (isDown) ? meme.lines[lineIdx].pos.y += 5 : meme.lines[lineIdx].pos.y -= 5;
+    if (!gMeme.lines.length) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].pos.y = (isDown) ? gMeme.lines[lineIdx].pos.y += 5 : gMeme.lines[lineIdx].pos.y -= 5;
 }
 
 function deleteLine() {
-    let meme = getgMeme();
-    if (!meme.lines.length) return;
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines.splice(lineIdx, 1);
+    if (!gMeme.lines.length) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines.splice(lineIdx, 1);
 }
 
 function deleteSavedMemes() {
@@ -187,8 +177,7 @@ function getGrabbedLine() {
 }
 
 function isLineClicked(clickedPos) {
-    let meme = getgMeme();
-    gGrabbedLine = meme.lines.find((line, idx) => {
+    gGrabbedLine = gMeme.lines.find((line, idx) => {
         //old way
         // const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2);
         // if (distance <= line.size) {
@@ -196,8 +185,8 @@ function isLineClicked(clickedPos) {
         //     meme.selectedLineIdx = idx;
         //     return true;
         // }
-        if (clickedPos.x >= line.pos.x - line.size * 5 && clickedPos.x <= line.pos.x + line.size * 5 && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size) {
-            meme.selectedLineIdx = idx;
+        if (clickedPos.x >= line.pos.x - line.size * 4.5 && clickedPos.x <= line.pos.x + line.size * 5 && clickedPos.y >= line.pos.y - line.size / 2 && clickedPos.y <= line.pos.y + line.size * 1.2) {
+            gMeme.selectedLineIdx = idx;
             return true;
         }
     });
