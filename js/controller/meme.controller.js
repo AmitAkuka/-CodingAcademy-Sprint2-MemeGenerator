@@ -9,7 +9,7 @@ function renderMeme() {
     const { selectedImgId, lines, stickers } = getgMeme();
     //return when resize calling func
     let img = new Image();
-    img.src = `../../images/${selectedImgId}.jpg`
+    img.src = `images/${selectedImgId}.jpg`
     img.onload = () => {
         //Draw Image
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
