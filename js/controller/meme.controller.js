@@ -41,11 +41,13 @@ function renderMeme() {
                 let stickerImg = new Image();
                 stickerImg.src = `images/stickers/${line.stickerId}.png`;
                 if (!line.pos) {
-                    let y = 50;
+                    let y = 120 - line.size;
                     let x = gElCanvas.width - 100;
+                    //Image size calculated from top, unliked text that calculated from bottom.
+                    //in order to fix issues we use y - line.size!.
                     line.pos = { x: x, y: y };
                 }
-                gCtx.drawImage(stickerImg, line.pos.x, line.pos.y, line.size, line.size);
+                gCtx.drawImage(stickerImg, line.pos.x, line.pos.y - line.size, line.size, line.size);
 
             }
         })

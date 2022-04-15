@@ -185,7 +185,10 @@ function isLineClicked(clickedPos) {
         //     meme.selectedLineIdx = idx;
         //     return true;
         // }
-        if (clickedPos.x >= line.pos.x - line.size * 4.5 && clickedPos.x <= line.pos.x + line.size * 5 && clickedPos.y >= line.pos.y - line.size / 2 && clickedPos.y <= line.pos.y + line.size * 1.2) {
+        //Checking if line is sticker, sticker and lines x radius are calculated differently.
+        let xRadius = (line.isSticker) ? clickedPos.x >= line.pos.x && clickedPos.x <= line.pos.x + line.size :
+            clickedPos.x >= line.pos.x - line.size * 4.5 && clickedPos.x <= line.pos.x + line.size * 4.5;
+        if (xRadius && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size - (line.size / 1.5)) {
             gMeme.selectedLineIdx = idx;
             return true;
         }

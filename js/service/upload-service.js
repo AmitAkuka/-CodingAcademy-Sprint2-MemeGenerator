@@ -2,6 +2,7 @@ function uploadImg() {
     const imgDataUrl = gElCanvas.toDataURL("image/jpeg");
 
     function onSuccess(uploadedImgUrl) {
+        //Updated link :)
         window.open(`https://www.facebook.com/sharer.php?u=${uploadedImgUrl}`);
     }
     doUploadImg(imgDataUrl, onSuccess);
