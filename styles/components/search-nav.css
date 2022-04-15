@@ -15,7 +15,8 @@
 
 .search-container .categorie-input {
     height: 30px;
-    width: 200px;
+    width: 10.5%;
+    min-width: 125px;
 }
 
 .search-container p:hover {
