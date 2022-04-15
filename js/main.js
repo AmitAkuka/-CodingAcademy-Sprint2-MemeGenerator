@@ -38,10 +38,14 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev);
-    if (!isLineClicked(pos)) return;
+    if (!isLineClicked(pos)) {
+        onClearSelectedLine();
+        return;
+    }
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
+    renderMeme(); //We want to mark new line when user click once
 }
 
 function onMove(ev) {

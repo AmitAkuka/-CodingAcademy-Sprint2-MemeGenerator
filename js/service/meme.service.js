@@ -18,16 +18,23 @@ let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'akward'] },
     { id: 13, url: 'img/13.jpg', keywords: ['akward', 'happy'] },
     { id: 14, url: 'img/14.jpg', keywords: ['funny', 'sad'] },
     { id: 15, url: 'img/15.jpg', keywords: ['funny', 'akward'] },
-    { id: 16, url: 'img/16.jpg', keywords: ['funny', 'akward'] }
+    { id: 16, url: 'img/16.jpg', keywords: ['funny', 'akward'] },
+    { id: 17, url: 'img/17.jpg', keywords: ['bad', 'sad'] },
+    { id: 18, url: 'img/18.jpg', keywords: ['funny', 'akward'] },
+    { id: 19, url: 'img/19.jpg', keywords: ['akward', 'happy'] },
+    { id: 20, url: 'img/20.jpg', keywords: ['akward', 'funny'] },
+    { id: 21, url: 'img/21.jpg', keywords: ['happy', 'funny'] },
+    { id: 22, url: 'img/22.jpg', keywords: ['funny', 'akward'] },
+    { id: 23, url: 'img/23.jpg', keywords: ['funny', 'animal'] },
+    { id: 24, url: 'img/24.jpg', keywords: ['funny', 'akward'] },
 ];
 let gSavedMemes = [];
 let gMeme = null;
 let gGrabbedLine = null;
 
 function setLineTxt(txt) {
-    let meme = getgMeme();
-    let lineIdx = meme.selectedLineIdx;
-    meme.lines[lineIdx].txt = txt;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines[lineIdx].txt = txt;
 }
 
 function setImg(imgId) {
@@ -42,6 +49,7 @@ function updategMeme(memeImg) {
     gMeme = {
         selectedImgId: memeImg.id,
         selectedLineIdx: 0,
+        isClearSelectedLine: false,
         lines: [{
             isSticker: false,
             txt: 'Enter your text here...',
@@ -186,9 +194,9 @@ function isLineClicked(clickedPos) {
         //     return true;
         // }
         //Checking if line is sticker, sticker and lines x radius are calculated differently.
-        let xRadius = (line.isSticker) ? clickedPos.x >= line.pos.x && clickedPos.x <= line.pos.x + line.size :
+        let isInXRadius = (line.isSticker) ? clickedPos.x >= line.pos.x && clickedPos.x <= line.pos.x + line.size :
             clickedPos.x >= line.pos.x - line.size * 4.5 && clickedPos.x <= line.pos.x + line.size * 4.5;
-        if (xRadius && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size - (line.size / 1.5)) {
+        if (isInXRadius && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size - (line.size / 1.5)) {
             gMeme.selectedLineIdx = idx;
             return true;
         }

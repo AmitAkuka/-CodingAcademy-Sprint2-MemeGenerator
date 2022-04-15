@@ -6,7 +6,7 @@ let gElCanvas = document.querySelector('#canvas');
 let gCtx = gElCanvas.getContext('2d');
 
 function renderMeme() {
-    const { selectedImgId, lines } = getgMeme();
+    const { selectedImgId, selectedLineIdx, isClearSelectedLine, lines } = getgMeme();
     let img = new Image();
     img.src = `images/${selectedImgId}.jpg`
     img.onload = () => {
@@ -48,10 +48,30 @@ function renderMeme() {
                     line.pos = { x: x, y: y };
                 }
                 gCtx.drawImage(stickerImg, line.pos.x, line.pos.y - line.size, line.size, line.size);
-
+            }
+            //Mark selected Line
+            if (idx === selectedLineIdx && !isClearSelectedLine) {
+                markSelectedLine(line);
             }
         })
     };
+}
+
+function markSelectedLine(line = gGrabbedLine()) {
+    let metrics = gCtx.measureText(line.txt);
+    let txtWidth = metrics.width;
+    let txtHeight = gCtx.measureText('M').width;
+    //default linewidth of stroke is 1.
+    gCtx.strokeStyle = 'red';
+    (line.isSticker) ? gCtx.strokeRect(line.pos.x, line.pos.y - line.size, line.size, txtHeight + line.size - 20):
+        gCtx.strokeRect(line.pos.x - line.size * 4.5, line.pos.y - line.size, txtWidth + (line.size / 2), txtHeight + (line.size / 2));
+}
+
+function onClearSelectedLine() {
+    let meme = getgMeme();
+    meme.isClearSelectedLine = true;
+    renderMeme();
+    meme.isClearSelectedLine = false;
 }
 
 function onSavedNavClick(elSavedNav) {
@@ -71,9 +91,13 @@ function onSavedNavClick(elSavedNav) {
     document.querySelector('.saved-memes-gallery').innerHTML = strHTML.join('');
 }
 
+
 function onSaveMeme() {
-    saveMeme();
-    document.querySelector('.saved-memes-amout').innerText++;
+    onClearSelectedLine();
+    setTimeout(() => {
+        saveMeme();
+        document.querySelector('.saved-memes-amout').innerText++;
+    }, 250)
 }
 
 function onDeleteSavedMemes() {
@@ -115,13 +139,13 @@ function onChangeStrokeColor(color) {
 }
 
 function onAddline() {
-    console.log('adding line');
     setNewLine();
     renderMeme();
 }
 
 function onSwitchLine() {
     let txtLine = setSwitchLine();
+    renderMeme();
     if (!txtLine) return;
 
 }
@@ -141,13 +165,18 @@ function onDeleteLine() {
     renderMeme();
 }
 
+//timeouts,async and await funcs didnt work on delayed download 
+//(need to wait until new canvas is rendered witout the selected line)
 function onDownloadCanvas(elLink) {
+    onClearSelectedLine();
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'Sprint2-AmitAkuka.jpg';
 }
 
 function onShareMeme() {
-    console.log('share')
-    uploadImg();
+    onClearSelectedLine();
+    setTimeout(() => {
+        uploadImg();
+    }, 250);
 }
