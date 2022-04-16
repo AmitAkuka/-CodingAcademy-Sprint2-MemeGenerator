@@ -3,31 +3,36 @@
 console.log('Meme service Working!');
 
 const SAVED_MEME_KEY = 'SavedMemes';
-let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'akward'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['animal', 'funny'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['animal', 'funny'] },
-    { id: 4, url: 'img/4.jpg', keywords: ['animal', 'cat'] },
-    { id: 5, url: 'img/5.jpg', keywords: ['funny', 'happy'] },
-    { id: 6, url: 'img/6.jpg', keywords: ['funny', 'akward'] },
-    { id: 7, url: 'img/7.jpg', keywords: ['funny', 'bad'] },
-    { id: 8, url: 'img/8.jpg', keywords: ['funny', 'akward'] },
-    { id: 9, url: 'img/9.jpg', keywords: ['funny', 'happy'] },
-    { id: 10, url: 'img/10.jpg', keywords: ['funny', 'bad'] },
-    { id: 11, url: 'img/11.jpg', keywords: ['akward', 'sad'] },
-    { id: 12, url: 'img/12.jpg', keywords: ['bad', 'sad'] },
-    { id: 13, url: 'img/13.jpg', keywords: ['akward', 'happy'] },
-    { id: 14, url: 'img/14.jpg', keywords: ['funny', 'sad'] },
-    { id: 15, url: 'img/15.jpg', keywords: ['funny', 'akward'] },
-    { id: 16, url: 'img/16.jpg', keywords: ['funny', 'akward'] },
-    { id: 17, url: 'img/17.jpg', keywords: ['bad', 'sad'] },
-    { id: 18, url: 'img/18.jpg', keywords: ['funny', 'akward'] },
-    { id: 19, url: 'img/19.jpg', keywords: ['akward', 'happy'] },
-    { id: 20, url: 'img/20.jpg', keywords: ['akward', 'funny'] },
-    { id: 21, url: 'img/21.jpg', keywords: ['happy', 'funny'] },
-    { id: 22, url: 'img/22.jpg', keywords: ['funny', 'akward'] },
-    { id: 23, url: 'img/23.jpg', keywords: ['funny', 'animal'] },
-    { id: 24, url: 'img/24.jpg', keywords: ['funny', 'akward'] },
+let gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['funny', 'akward'] },
+    { id: 2, url: 'images/2.jpg', keywords: ['animal', 'funny'] },
+    { id: 3, url: 'images/3.jpg', keywords: ['animal', 'funny'] },
+    { id: 4, url: 'images/4.jpg', keywords: ['animal', 'cat'] },
+    { id: 5, url: 'images/5.jpg', keywords: ['funny', 'happy'] },
+    { id: 6, url: 'images/6.jpg', keywords: ['funny', 'akward'] },
+    { id: 7, url: 'images/7.jpg', keywords: ['funny', 'bad'] },
+    { id: 8, url: 'images/8.jpg', keywords: ['funny', 'akward'] },
+    { id: 9, url: 'images/9.jpg', keywords: ['funny', 'happy'] },
+    { id: 10, url: 'images/10.jpg', keywords: ['funny', 'bad'] },
+    { id: 11, url: 'images/11.jpg', keywords: ['akward', 'sad'] },
+    { id: 12, url: 'images/12.jpg', keywords: ['bad', 'sad'] },
+    { id: 13, url: 'images/13.jpg', keywords: ['akward', 'happy'] },
+    { id: 14, url: 'images/14.jpg', keywords: ['funny', 'sad'] },
+    { id: 15, url: 'images/15.jpg', keywords: ['funny', 'akward'] },
+    { id: 16, url: 'images/16.jpg', keywords: ['funny', 'akward'] },
+    { id: 17, url: 'images/17.jpg', keywords: ['bad', 'sad'] },
+    { id: 18, url: 'images/18.jpg', keywords: ['funny', 'akward'] },
+    { id: 19, url: 'images/19.jpg', keywords: ['akward', 'happy'] },
+    { id: 20, url: 'images/20.jpg', keywords: ['akward', 'funny'] },
+    { id: 21, url: 'images/21.jpg', keywords: ['happy', 'funny'] },
+    { id: 22, url: 'images/22.jpg', keywords: ['funny', 'akward'] },
+    { id: 23, url: 'images/23.jpg', keywords: ['funny', 'animal'] },
+    { id: 24, url: 'images/24.jpg', keywords: ['funny', 'akward'] },
 ];
+let gStickers = ['sticker1', 'sticker2', 'sticker3', 'sticker4', 'sticker5',
+    'sticker6', 'sticker7', 'sticker8', 'sticker9', 'sticker10'
+];
+let gStickersAmout = 4;
+let gStickersStartIdx = 0;
 let gSavedMemes = [];
 let gMeme = null;
 let gGrabbedLine = null;
@@ -174,6 +179,18 @@ function loadSavedMemesAmout() {
         let gSavedMemes = savedMemes;
         elMemesAmout.innerText = gSavedMemes.length;
     }
+}
+
+function getStickers() {
+    let idxStart = gStickersStartIdx * gStickersAmout;
+    let stickers = gStickers.slice(idxStart, idxStart + gStickersAmout);
+    return stickers;
+}
+
+function updateStickersStartIdx(isLeftClick) {
+    if ((gStickersStartIdx - 1 < 0) && isLeftClick ||
+        (gStickersStartIdx >= Math.floor((gStickers.length - 1) / gStickersAmout)) && !isLeftClick) return;
+    gStickersStartIdx = (isLeftClick) ? gStickersStartIdx - 1 : gStickersStartIdx + 1;
 }
 
 function getgMeme() {

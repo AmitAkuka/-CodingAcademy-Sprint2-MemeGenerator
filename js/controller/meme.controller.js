@@ -108,6 +108,20 @@ function onDeleteSavedMemes() {
     }
 }
 
+function onClickStickerBox(isLeftClick) {
+    updateStickersStartIdx(isLeftClick);
+    renderStickers();
+}
+
+
+function renderStickers() {
+    let stickers = getStickers();
+    let strHTML = stickers.map(sticker => {
+        return `<img id="${sticker}" onclick="onAddSticker(this.id)" src="images/stickers/${sticker}.png"></img>`
+    });
+    document.querySelector('.stickers-list').innerHTML = strHTML.join('');
+}
+
 function onAddSticker(stickerId) {
     setSticker(stickerId);
     renderMeme();
