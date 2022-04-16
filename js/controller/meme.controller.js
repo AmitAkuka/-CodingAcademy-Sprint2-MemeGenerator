@@ -64,8 +64,12 @@ function markSelectedLine(line = gGrabbedLine()) {
     //old x calc for non sticker start pos: (line.pos.x - line.size * 4.5);
     //default linewidth of stroke is 1.
     gCtx.strokeStyle = 'red';
+    //0 means center.
+    let lineAlignPos = 0;
+    if (line.align === 'left' && !line.isSticker) lineAlignPos = txtWidth / 2;
+    else if (line.align === 'right' && !line.isSticker) lineAlignPos = -txtWidth / 2;
     (line.isSticker) ? gCtx.strokeRect(line.pos.x, line.pos.y - line.size, line.size, txtHeight + line.size - 20):
-        gCtx.strokeRect(line.pos.x - (txtWidth / 2) - 8, line.pos.y - line.size, txtWidth + (line.size / 2), txtHeight + (line.size / 2));
+        gCtx.strokeRect(line.pos.x - (txtWidth / 2) + lineAlignPos - 8, line.pos.y - line.size, txtWidth + (line.size / 2) - 8, txtHeight + (line.size / 2));
 }
 
 function onClearSelectedLine() {

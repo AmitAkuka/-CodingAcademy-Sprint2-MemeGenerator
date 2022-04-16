@@ -205,7 +205,7 @@ function getGrabbedLine() {
     return gGrabbedLine;
 }
 
-function isLineClicked(clickedPos) {
+function isLineClicked(clickedPos, ctx) {
     gGrabbedLine = gMeme.lines.find((line, idx) => {
         //old way
         // const distance = Math.sqrt((line.pos.x - clickedPos.x) ** 2 + (line.pos.y - clickedPos.y) ** 2);
@@ -214,9 +214,14 @@ function isLineClicked(clickedPos) {
         //     meme.selectedLineIdx = idx;
         //     return true;
         // }
+        let metrics = ctx.measureText(line.txt);
+        let txtWidth = metrics.width;
+        let lineAlignPos = 0;
+        if (line.align === 'left' && !line.isSticker) lineAlignPos = txtWidth / 2;
+        else if (line.align === 'right' && !line.isSticker) lineAlignPos = -txtWidth / 2;
         //Checking if line is sticker, sticker and lines x radius are calculated differently.
         let isInXRadius = (line.isSticker) ? clickedPos.x >= line.pos.x && clickedPos.x <= line.pos.x + line.size :
-            clickedPos.x >= line.pos.x - line.size * 4.5 && clickedPos.x <= line.pos.x + line.size * 4.5;
+            clickedPos.x >= line.pos.x - (txtWidth / 2) + lineAlignPos - 8 && clickedPos.x <= line.pos.x + (txtWidth / 2) + lineAlignPos + 8;
         if (isInXRadius && clickedPos.y >= line.pos.y - line.size && clickedPos.y <= line.pos.y + line.size - (line.size / 1.5)) {
             gMeme.selectedLineIdx = idx;
             return true;

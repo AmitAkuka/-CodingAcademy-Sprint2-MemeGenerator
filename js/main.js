@@ -40,11 +40,10 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev);
-    if (!isLineClicked(pos)) {
+    if (!isLineClicked(pos, gCtx)) {
         onClearSelectedLine();
         return;
     }
-    console.log('clicked pos', pos.x)
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
