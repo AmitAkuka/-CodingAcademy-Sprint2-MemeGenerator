@@ -2,6 +2,7 @@
     margin-top: 10px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    margin-bottom: 78px;
 }
 
 .images-container>img {
