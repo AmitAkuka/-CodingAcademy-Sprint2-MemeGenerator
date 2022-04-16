@@ -61,10 +61,11 @@ function markSelectedLine(line = gGrabbedLine()) {
     let metrics = gCtx.measureText(line.txt);
     let txtWidth = metrics.width;
     let txtHeight = gCtx.measureText('M').width;
+    //old x calc for non sticker start pos: (line.pos.x - line.size * 4.5);
     //default linewidth of stroke is 1.
     gCtx.strokeStyle = 'red';
     (line.isSticker) ? gCtx.strokeRect(line.pos.x, line.pos.y - line.size, line.size, txtHeight + line.size - 20):
-        gCtx.strokeRect(line.pos.x - line.size * 4.5, line.pos.y - line.size, txtWidth + (line.size / 2), txtHeight + (line.size / 2));
+        gCtx.strokeRect(line.pos.x - (txtWidth / 2) - 8, line.pos.y - line.size, txtWidth + (line.size / 2), txtHeight + (line.size / 2));
 }
 
 function onClearSelectedLine() {

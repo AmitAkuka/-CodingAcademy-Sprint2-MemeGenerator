@@ -44,6 +44,7 @@ function onDown(ev) {
         onClearSelectedLine();
         return;
     }
+    console.log('clicked pos', pos.x)
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';
