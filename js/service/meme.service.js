@@ -162,14 +162,18 @@ function saveMeme() {
 
 
 function getSavedMemes() {
-    gSavedMemes = loadFromStorage(SAVED_MEME_KEY);
-    return gSavedMemes;
+    return loadFromStorage(SAVED_MEME_KEY);
 }
 
 function loadSavedMemesAmout() {
-    getSavedMemes();
-    let savedMemes = gSavedMemes;
-    document.querySelector('.saved-memes-amout').innerText = savedMemes.length;
+    let elMemesAmout = document.querySelector('.saved-memes-amout');
+    let savedMemes = getSavedMemes();
+    if (!savedMemes) {
+        elMemesAmout.innerText = 0;
+    } else {
+        let gSavedMemes = savedMemes;
+        elMemesAmout.innerText = gSavedMemes.length;
+    }
 }
 
 function getgMeme() {
