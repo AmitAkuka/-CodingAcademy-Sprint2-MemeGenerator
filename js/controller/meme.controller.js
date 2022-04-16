@@ -167,11 +167,15 @@ function onDeleteLine() {
 
 //timeouts,async and await funcs didnt work on delayed download 
 //(need to wait until new canvas is rendered witout the selected line)
-function onDownloadCanvas(elLink) {
+function onDownloadCanvas() {
     onClearSelectedLine();
-    const data = gElCanvas.toDataURL();
-    elLink.href = data;
-    elLink.download = 'Sprint2-AmitAkuka.jpg';
+    let elLink = document.querySelector('.download-link');
+    setTimeout(() => {
+        const data = gElCanvas.toDataURL();
+        elLink.href = data;
+        elLink.download = 'Sprint2-AmitAkuka.jpg';
+        elLink.click();
+    }, 250);
 }
 
 function onShareMeme() {

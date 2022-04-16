@@ -20,7 +20,9 @@ function addListeners() {
     });
     window.addEventListener('resize', () => {
         resizeCanvas();
-        renderMeme();
+        onClearSelectedLine();
+        //onClear already rendermeme.
+        // renderMeme();
     })
 }
 
