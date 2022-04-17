@@ -44,6 +44,7 @@ function onDown(ev) {
         onClearSelectedLine();
         return;
     }
+    updateTxtInput();
     setLineDrag(true);
     gStartPos = pos;
     document.body.style.cursor = 'grabbing';

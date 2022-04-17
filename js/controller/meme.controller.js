@@ -69,7 +69,7 @@ function markSelectedLine(line = gGrabbedLine()) {
     if (line.align === 'left' && !line.isSticker) lineAlignPos = txtWidth / 2;
     else if (line.align === 'right' && !line.isSticker) lineAlignPos = -txtWidth / 2;
     (line.isSticker) ? gCtx.strokeRect(line.pos.x, line.pos.y - line.size, line.size, txtHeight + line.size - 20):
-        gCtx.strokeRect(line.pos.x - (txtWidth / 2) + lineAlignPos - 8, line.pos.y - line.size, txtWidth + (line.size / 2) - 8, txtHeight + (line.size / 2));
+        gCtx.strokeRect(line.pos.x - (txtWidth / 2) + lineAlignPos - 8, line.pos.y - line.size, txtWidth + (line.size / 2) + 4, txtHeight + (line.size / 2));
 }
 
 function onClearSelectedLine() {
@@ -133,6 +133,7 @@ function onAddSticker(stickerId) {
 }
 
 function onTxtInput(txt) {
+    document.querySelector('.text-input').value = txt;
     setLineTxt(txt);
     renderMeme();
 }
@@ -158,15 +159,25 @@ function onChangeStrokeColor(color) {
 }
 
 function onAddline() {
+    document.querySelector('.text-input').value = '';
     setNewLine();
     renderMeme();
 }
 
 function onSwitchLine() {
     let txtLine = setSwitchLine();
+    updateTxtInput();
     renderMeme();
     if (!txtLine) return;
 
+}
+
+function updateTxtInput() {
+    let elTxtInput = document.querySelector('.text-input');
+    let memes = getgMeme();
+    let selectedLine = memes.lines[memes.selectedLineIdx];
+    if (selectedLine.txt === 'Enter your text here...' || selectedLine.isSticker) elTxtInput.value = '';
+    else elTxtInput.value = selectedLine.txt;
 }
 
 function onChangeFont(font) {
